@@ -1,6 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+h1,h2,h3{
+  font-family: 'Playfair Display';
+}
+
+p,nav, header, li, button, a{
+  font-family: 'Nunito Sans';
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+}
+
+nav{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#flux, #flames, #stickers, #hub-caps{
+  background-color: #55D6BE;
+  width: 150px;
+  padding: 20px;
+  border: 2px solid black;
+}
+.upper{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.lower{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navigation{
+  background-color: black;
+  color: white;
+}
+.siteName{
+  font-size: 2em;
+}
+
+a#csemotors, a#account{
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
+
+a#csemotors:hover, a#account:hover{
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+a.navi{
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  
+}
+
+#delorean{
+  background-image: url("../images/vehicles/delorean.jpg");
+  background-repeat: no-repeat;
+  padding: 40px;
+}
+
+#delorean-text{
+  background-color: rgba(0, 0, 0, 0.568);
+  color: yellow;
+  padding: 10px;
+  width: 40%;
+}
+
+button{
+  background-color: yellow;
+  color: black;
+  font-size: 1.5em;
+  padding: 5px;
+}
+
+button:hover{
+  background-color: black;
+  color: yellow;
+}
+
+#features{
+  list-style-type: none;
+}
+
+/*****Link for color palette https://coolors.co/55d6be-acfcd9-7d5ba6-dddddd-fc6471 ******/
+
+#welcome-text{
+  font-size: 2em;
+}
+
+@media screen and (min-width: 850px){
+  
+  body {
+    background-image: url("../images/site/small_check.jpg");
+    background-color: white;
+    width: 50%;
+    height: 80%;
+    border: 5px solid #55D6BE;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+
+  .upgrades-reviews{
+    display: grid;
+  }
+
+  .upgrades{
+    grid-column: 1/2;
+    margin-top: -385px;
+  }
+  .reviews{
+    grid-column: 2/2;
+  }
+  header{
+    background-color: white;
+    padding: 30px;
+  }
+  footer{
+    background-color: white;
+    padding: 10px;
+    
+  }
+  main{
+    background-color: white;
+    padding: 10px;
+  }
+  nav{
+    background-color: white;
+    padding: 10px;
+    margin-top: -20px;
+  }
+  
 }
