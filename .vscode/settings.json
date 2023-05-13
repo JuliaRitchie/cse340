@@ -2,13 +2,15 @@
     "sqltools.connections": [
         {
             "pgOptions": {
-                "ssl": true
+                "ssl": {
+                    "key": ""
+                }
             },
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
             "name": "render.com",
-            "connectString": "postgres://cse340:PZ8hNCGdEcq8cor8ciQ4SPy9OR2yh59q@dpg-ch9836tgk4qeoo32s60g-a.oregon-postgres.render.com/cse340_2noe"
+            "connectString": "postgres://cse340jr_user:GiFKqyBDcWg15M3x7vDKnPZQGdm80yGM@dpg-chfhp2rhp8u065pkn840-a.oregon-postgres.render.com/cse340jr"
         }
     ]
 }
