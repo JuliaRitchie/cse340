@@ -1,4 +1,4 @@
--- Password for server: PZ8hNCGdEcq8cor8ciQ4SPy9OR2yh59q
+-- Password for server: 3ryW4N6UPL0PnQzzrQ5RW7hFhvG112mK
 CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 

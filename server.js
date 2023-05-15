@@ -21,10 +21,16 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(require("./routes/static"))
+const baseController = require("./controllers/baseController")
+
+// Inventory routes
+app.use("/inv", require("./routes/inventoryRoute"))
 // Index route
-app.get('/', function(req, res){
-  res.render("index", {title: "Home"})
-})
+// app.get('/', function(req, res){
+//   res.render("index", {title: "Home"})
+// })
+
+app.get('/', baseController.buildHome)
 
 /* ***********************
  * Local Server Information
@@ -39,3 +45,4 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
+
