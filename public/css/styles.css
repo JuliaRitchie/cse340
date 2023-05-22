@@ -12,7 +12,7 @@ h1,h2,h3{
   font-family: 'Playfair Display';
 }
 
-p,nav, header, li, button, a{
+p, nav, header, li, button, a{
   font-family: 'Nunito Sans';
 }
 
@@ -45,6 +45,7 @@ nav{
 .navigation{
   background-color: black;
   color: white;
+  
 }
 .siteName{
   font-size: 2em;
@@ -54,6 +55,28 @@ a#csemotors, a#account{
   background-color: white;
   color: black;
   text-decoration: none;
+}
+
+nav ul li{
+  list-style-type: none;
+  display: flex;
+  display: inline;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+nav ul li a{
+  text-decoration: none;
+  color: white;
+  font-size: 1.25em;
+  padding: 10px;
+}
+nav ul li a:hover{
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  font-size: 1.25em;
+  padding: 10px;
 }
 
 a#csemotors:hover, a#account:hover{
