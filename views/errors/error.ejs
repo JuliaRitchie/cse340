@@ -1,0 +1,10 @@
+<%# The Content Heading %>
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%# messages() %>
+<p>Oh no! Looks like you get lost! Here's a bicycle to pedal your way back to the home page.</p>
+<img id="bicycle" src="https://www.publicdomainpictures.net/pictures/40000/velka/bicycle-clipart.jpg" alt="black bicycle clipart">
