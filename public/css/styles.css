@@ -131,6 +131,11 @@ button:hover{
   font-size: 2em;
 }
 
+main li{
+  list-style-type: none;
+  display: flex;
+}
+
 @media screen and (min-width: 850px){
   
   body {
