@@ -60,8 +60,25 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
-
-
+/* **************************************
+* Build the Single Car view HTML
+* ************************************ */
+Util.buildSingleCarView = async function(data){
+  let vehicle = data[0]
+  let single = ` 
+    <div class="singleViewCarDiv">
+      <img alt="vehicle-picture" src="${vehicle.inv_image}" id="vehicle_img">
+      <div class="singleViewCarText">
+        <h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>
+        <p id="price">Price: $${Number(vehicle.inv_price).toLocaleString()}</p>
+        <p id="miles">Miles: ${Number(vehicle.inv_miles).toLocaleString()}</p>
+        <p>Color: ${vehicle.inv_color}</p>
+        <p>Description: ${vehicle.inv_description}</p>
+      </div>
+    </div>
+  `
+  return single
+}
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

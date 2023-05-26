@@ -47,8 +47,19 @@ nav{
   color: white;
   
 }
+
+#vehicle_img{
+  width: 50%;
+  padding: 10px;
+}
+
 .siteName{
   font-size: 2em;
+}
+
+.singleViewCarDiv{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 a#csemotors, a#account{
@@ -158,6 +169,10 @@ main li{
   }
   .reviews{
     grid-column: 2/2;
+  }
+  .singleViewCarDiv{
+    display: flex;
+    flex-wrap: nowrap;
   }
   header{
     background-color: white;
