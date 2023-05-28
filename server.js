@@ -35,9 +35,12 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 app.get('/', baseController.buildHome)
 
+
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+  next({status: 500, message: 'It seems the server has crashed.'})
 })
 
 /* ***********************
@@ -47,10 +50,27 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = "Oh no! Looks like you get lost! Here's a bicycle to pedal your way back to the home page."}
-  res.render("errors/error", {
-    title: err.status || 'Server Error',
-    message,
+  if(err.status == 404){ message = err.message
+    res.render("errors/error", {
+      title: err.status || 'Server Error',
+      message,
+      nav
+    })
+  } else if(err.status == 500){message = err.message
+    res.render("errors/broken", {
+      title: "Execute Order 66",
+      message,
+      nav
+    })} else {message = "Looks like the page was lost."}
+  
+})
+
+app.use(async (err, req, res, next) => {
+  let nav = await utilities.getNav()
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  res.render("errors/broken", {
+    title: err.status || 'Internal Error',
+    message: err.message,
     nav
   })
 })
