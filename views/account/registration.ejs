@@ -13,6 +13,7 @@
     <label for="email">Email:</label>
     <input type="email" id="email" name="account_email" required>
     <label for="pwd">Password:</label>
-    <input type="password" id="pwd" name="account_password" required minlength="12">
-    <input type="submit" value="Submit">
+    <input type="password" id="pwd" name="account_password" required pattern="(?=.*[0-9]) (?=.*[A-Z]) (?=.*[^0-9a-zA-Z]).{12,}">
+    <p>Password must contain 1 capital letter, 1 number, 1 special character and to be at least 12 characters long.</p>
+    <input type="submit" value="Submit" id="submitButton">
   </form>
