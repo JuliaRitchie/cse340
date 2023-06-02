@@ -152,7 +152,7 @@ main li{
   body {
     background-image: url("../images/site/small_check.jpg");
     background-color: white;
-    width: 50%;
+    width: 70%;
     height: 80%;
     border: 5px solid #55D6BE;
     border-radius: 10px;
@@ -165,7 +165,7 @@ main li{
 
   .upgrades{
     grid-column: 1/2;
-    margin-top: -385px;
+    margin-top: -200px; 
   }
   .reviews{
     grid-column: 2/2;
