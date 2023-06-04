@@ -158,6 +158,14 @@ button:hover{
   width: 50%;
 }
 
+input:required:invalid, input:focus:invalid {
+  background-color: red;
+ }
+
+ input:required:valid {
+  background-color: greenyellow;
+ }
+
 /*****Link for color palette https://coolors.co/55d6be-acfcd9-7d5ba6-dddddd-fc6471 ******/
 
 #welcome-text{
