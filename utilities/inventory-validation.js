@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator")
 const validate = {}
 const inventoryModel = require("../models/inventory-model")
 
-validate.registrationRules = () => {
+validate.classificationRules = () => {
     return [
         body("classification_name")
         .isLength({ min: 1 })
@@ -11,7 +11,7 @@ validate.registrationRules = () => {
     ]
 }
 
-validate.checkRegData = async (req, res, next) => {
+validate.checkClassification = async (req, res, next) => {
     const { classification_name } = req.body
     let errors = []
     errors = validationResult(req)
