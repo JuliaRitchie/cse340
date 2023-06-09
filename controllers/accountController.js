@@ -69,11 +69,5 @@ async function registerAccount(req, res) {
   }
 }
 
-// const regResult = await accountModel.accountRegister(
-//   account_firstname,
-//   account_lastname,
-//   account_email,
-//   hashedPassword
-// )
 
 module.exports = { buildLogin, buildRegister, registerAccount }
