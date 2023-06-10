@@ -22,5 +22,11 @@ router.post(
     invValidate.checkClassification,
     utilities.handleErrors(invController.AddNewClassification)
   );
-
+router.post(
+  "/add-new-inventory",
+  invValidate.vehicleRules(),
+  invValidate.checkNewVehicle,
+  // don't forget to add the actual processing function
+  utilities.handleErrors(invController.AddNewVehicle)
+)
 module.exports = router;

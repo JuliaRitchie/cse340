@@ -1,35 +1,38 @@
 <%# The Content Heading %>
 <% if (title) { %>
     <h1><%= title %></h1>
-    <% } else {
-      res.redirect('/')
-    } %>
+<% } else {
+  res.redirect('/')
+} %>
 
-<% messages() %>
-<form action="inv/management" method="post">
+<%- messages() %>
+<form action="/inv/add-new-inventory" method="post">
   <!----inv_make----->
   <label for="inv_make">Vehicle Make:</label>
-  <input id="inv_make" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" required>
+  <input id="inv_make" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make %>" required>
   <!----inv_model----->
   <label for="inv_model">Vehicle Model:</label>
-  <input id="inv_model" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" required>
+  <input id="inv_model" type="text" name="inv_model" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_model %>" required>
   <!----inv_year----->
   <label for="inv_year">Vehicle Year:</label>
-  <input id="inv_year" type="text" name="inv_year" pattern="^[a-zA-Z0-9]+$" required>
+  <span>Only put in a 4 digit year. Example: 2009</span>
+  <input id="inv_year" type="text" name="inv_year" pattern="^[0-9]{4}$" value="<%= locals.inv_year %>" required>
   <!----inv_description----->
   <label for="inv_description">Vehicle Description:</label>
-  <input id="inv_description" type="text" name="inv_description" pattern="^[a-zA-Z0-9]+$" required>
+  <input id="inv_description" type="text" name="inv_description" value="<%= locals.inv_description %>" required>
   <!----inv_image?----->
   <label for="inv_image">Vehicle Image Path:</label>
-  <input id="inv_image" type="text" name="inv_description" required>
+  <input id="inv_image" type="text" name="inv_image" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_image %>" required>
   <!----inv_price----->
   <label for="inv_price">Vehicle Price:</label>
-  <input id="inv_price" type="number" name="inv_price" required>
+  <input id="inv_price" type="text" pattern="[0-9]*" name="inv_price" value="<%= locals.inv_price %>" required>
   <!----inv_miles----->
   <label for="inv_miles">Vehicle Miles:</label>
-  <input id="inv_miles" type="number" name="inv_miles" required>
+  <input id="inv_miles" type="text" pattern="[0-9]*" name="inv_miles" value="<%= locals.inv_miles %>" required>
   <!----inv_color----->
   <label for="inv_color">Vehicle Color:</label>
-  <input id="inv_color" type="text" name="inv_color" required>
+  <input id="inv_color" type="text" name="inv_color" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_color %>" required>
+  <label for="classification_id">Vehicle Classification:</label>
+  <%- classification %>
   <input type="submit" value="Submit" id="submitButton">
 </form>
