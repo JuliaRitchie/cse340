@@ -9,9 +9,11 @@
 <form action="/inv/add-new-inventory" method="post">
   <!----inv_make----->
   <label for="inv_make">Vehicle Make:</label>
+  <span>Only input letters</span>
   <input id="inv_make" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make %>" required>
   <!----inv_model----->
   <label for="inv_model">Vehicle Model:</label>
+  <span>Only input letters</span>
   <input id="inv_model" type="text" name="inv_model" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_model %>" required>
   <!----inv_year----->
   <label for="inv_year">Vehicle Year:</label>
@@ -22,17 +24,23 @@
   <input id="inv_description" type="text" name="inv_description" value="<%= locals.inv_description %>" required>
   <!----inv_image?----->
   <label for="inv_image">Vehicle Image Path:</label>
-  <input id="inv_image" type="text" name="inv_image" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_image %>" required>
+  <input id="inv_image" type="text" name="inv_image" value="<%= locals.inv_image %>" required>
   <!----inv_price----->
   <label for="inv_price">Vehicle Price:</label>
+  <span>Only input numbers</span>
   <input id="inv_price" type="text" pattern="[0-9]*" name="inv_price" value="<%= locals.inv_price %>" required>
   <!----inv_miles----->
   <label for="inv_miles">Vehicle Miles:</label>
+  <span>Only input numbers</span>
   <input id="inv_miles" type="text" pattern="[0-9]*" name="inv_miles" value="<%= locals.inv_miles %>" required>
   <!----inv_color----->
   <label for="inv_color">Vehicle Color:</label>
+  <span>Only input letters</span>
   <input id="inv_color" type="text" name="inv_color" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_color %>" required>
   <label for="classification_id">Vehicle Classification:</label>
-  <%- classification %>
+  <select name="classification_id" id="classification_id">
+    <%- classification %>
+  </select>
+  
   <input type="submit" value="Submit" id="submitButton">
 </form>

@@ -50,7 +50,8 @@ async function AddNewClassification(newClassification){
 
 async function AddNewVehicle(inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id){
   try{
-    const data = await pool.query("INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, '/images/vehicles/no-image.pgn', 'images/vehicles/no-image-tn.png', $5, $6, $7, $8) RETURNING *")
+    const data = await pool.query("INSERT INTO public.inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, '/images/vehicles/no-image.pgn', 'images/vehicles/no-image-tn.png', $5, $6, $7, $8) RETURNING *", [inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id])
+    console.log(data)
     return data
   } catch(error){
     console.error('AddNewVehicle in inventory model error' + error)

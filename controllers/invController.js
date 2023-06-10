@@ -103,7 +103,7 @@ invCont.AddNewVehicle = async function(req, res, next){
 
     if (vehicleResult) {
       let nav = await utilities.getNav()
-      let classification = await utilities.getClassificationList()
+      
       req.flash(
         "notice",
         `Congratulations, you added the ${inv_year} ${inv_color} ${inv_model}.`
@@ -113,6 +113,7 @@ invCont.AddNewVehicle = async function(req, res, next){
         nav,
       })
     } else {
+      let classification = await utilities.getClassificationList()
       req.flash("notice", "Sorry, the vehicle update failed.")
       res.status(501).render("./inventory/add-inventory", {
         title: "Add New Vehicle",
