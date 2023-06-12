@@ -29,6 +29,7 @@ validate.checkClassification = async (req, res, next) => {
     }
     next()
   }
+    
 validate.vehicleRules = () => {
     return [
       body("inv_make")
@@ -51,15 +52,14 @@ validate.vehicleRules = () => {
 
       body("inv_description")
       .trim()
-      .isAlpha()
       .isLength({min:1})
       .withMessage("Please provide an inventory description with only letters"),
 
-      body("inv_image")
-      .trim()
-      .isAlpha()
-      .isLength({min:1})
-      .withMessage("Please provide an image path for the vehicle"),
+      // body("inv_image")
+      // .trim()
+      // .isAlpha()
+      // .isLength({min:1})
+      // .withMessage("Please provide an image path for the vehicle"),
 
       body("inv_price")
       .trim()
@@ -82,11 +82,12 @@ validate.vehicleRules = () => {
 }
 
 validate.checkNewVehicle = async (req, res, next) => {
-  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_price, inv_miles, inv_color } = req.body
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_price, inv_miles, inv_color, classification_id } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
+    let classification = await utilities.getClassificationList()
     res.render("inventory/add-inventory", {
       errors,
       title: "Management View",
@@ -98,7 +99,9 @@ validate.checkNewVehicle = async (req, res, next) => {
       inv_image,
       inv_price,
       inv_miles,
-      inv_color
+      inv_color,
+      classification_id,
+      classification
     })
     return
   }

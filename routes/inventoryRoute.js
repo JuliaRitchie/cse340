@@ -15,6 +15,7 @@ router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInvent
 router.get("/", utilities.handleErrors(invController.buildManagementView))
 // Route to build add classification form view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+// Route to build add inventory form view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
 router.post(
     "/add-new-classification",
