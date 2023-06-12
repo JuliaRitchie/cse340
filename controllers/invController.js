@@ -62,7 +62,8 @@ invCont.buildAddInventory =  async function(req, res, next){
   res.render("./inventory/add-inventory", {
     title: 'Add New Vehicle',
     nav,
-    classification
+    classification,
+    errors: null
   })
 }
 
@@ -118,8 +119,7 @@ invCont.AddNewVehicle = async function(req, res, next){
       res.status(501).render("./inventory/add-inventory", {
         title: "Add New Vehicle",
         nav,
-        classification
-      })
+        classification      })
     }
 }
 
