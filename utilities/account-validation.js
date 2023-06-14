@@ -47,6 +47,26 @@ validate.registationRules = () => {
   }
 
 
+validate.loginRules = () => {
+  return [
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage('A vaild email is required.'),
+
+    body("account_password")
+    .trim()
+    .isStrongPassword({
+      minLength: 12,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+      })
+      .withMessage("Password does not follow requirements.")
+  ]
+}
+
 /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
@@ -68,7 +88,20 @@ validate.checkRegData = async (req, res, next) => {
     }
     next()
   }
-
+validate.checkLoginData = async (req, res, next) => {
+  const {account_email} = req.body
+  let errors = []
+  errors = validationResult(req)
+  if(!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+      errors,
+      title: "Login",
+      nav,
+      account_email
+    })
+  }
+}
 
   
   module.exports = validate
