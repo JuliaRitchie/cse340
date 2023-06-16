@@ -4,6 +4,8 @@
       res.redirect('/')
     } %>
 
+
+
 <% if (errors) { %>
   <ul class="notice">
  <% errors.array().forEach(error => { %>
@@ -11,6 +13,7 @@
 <%  }) %>
  </ul>
 <% } %>
+
 <form action="/account/register" method="post">
     <label for="fname">First Name:</label>
     <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>" placeholder="John">

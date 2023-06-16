@@ -51,6 +51,7 @@ validate.loginRules = () => {
   return [
     body("account_email")
       .trim()
+      .normalizeEmail()
       .isEmail()
       .withMessage('A vaild email is required.'),
 
@@ -65,7 +66,7 @@ validate.loginRules = () => {
       })
       .withMessage("Password does not follow requirements.")
   ]
-}
+};
 
 /* ******************************
  * Check data and return errors or continue to registration
@@ -77,7 +78,7 @@ validate.checkRegData = async (req, res, next) => {
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
       res.render("account/register", {
-        errors,
+        errors:null,
         title: "Registration",
         nav,
         account_firstname,
@@ -95,12 +96,13 @@ validate.checkLoginData = async (req, res, next) => {
   if(!errors.isEmpty()) {
     let nav = await utilities.getNav()
     res.render("account/login", {
-      errors,
+      errors: null,
       title: "Login",
       nav,
       account_email
     })
   }
+  next()
 }
 
   
