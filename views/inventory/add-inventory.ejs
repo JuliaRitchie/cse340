@@ -44,4 +44,7 @@
   </select>
   
   <input type="submit" value="Submit" id="submitButton">
+  <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
 </form>

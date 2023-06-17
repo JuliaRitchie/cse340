@@ -17,6 +17,11 @@ router.get("/", utilities.handleErrors(invController.buildManagementView))
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 // Route to build add inventory form view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
+
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+router.post("/update/", utilities.handleErrors(invController.updateInventory));
+
 router.post(
     "/add-new-classification",
     invValidate.classificationRules(),
