@@ -90,7 +90,7 @@ validate.checkNewVehicle = async (req, res, next) => {
     let classification = await utilities.getClassificationList()
     res.render("inventory/add-inventory", {
       errors,
-      title: "Management View",
+      title: "Add Vehicle",
       nav,
       inv_make,
       inv_model,
@@ -107,4 +107,33 @@ validate.checkNewVehicle = async (req, res, next) => {
   }
   next()
 }
+
+validate.checkUpdateData = async (req, res, next) => {
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_price, inv_miles, inv_color, classification_id, inv_id } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let classification = await utilities.getClassificationList()
+    res.render("inventory/edit", {
+      errors,
+      title: "Edit Vehicle",
+      nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+      classification,
+      inv_id
+    })
+    return
+  }
+  next()
+}
+
 module.exports = validate
