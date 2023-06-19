@@ -1,4 +1,3 @@
-<%# The Content Heading %>
 <% if (title) { %>
     <h1><%= title %></h1>
 <% } else {
@@ -15,7 +14,7 @@
  </ul>
 <% } %>
 
-<form action="/inv/add-new-inventory" method="post">
+<form action="/inv/update" method="post">
   <label for="inv_make">Vehicle Make:</label>
   <span>Only input letters</span>
   <input id="inv_make" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make %>" required>
@@ -42,6 +41,8 @@
   <select name="classification_id" id="classification_id">
     <%- classification %>
   </select>
-  
-  <input type="submit" value="Submit" id="submitButton">
+  <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
+    <button type="submit">Update Vehicle</button>
 </form>

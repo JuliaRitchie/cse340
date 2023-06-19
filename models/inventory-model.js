@@ -58,4 +58,38 @@ async function AddNewVehicle(inv_make, inv_model, inv_year, inv_description, inv
   }
 }
 
-module.exports = {getClassifications, getVehiclesByClassificationId, getVehicleByInventoryId, AddNewClassification, AddNewVehicle};
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function updateInventory(
+  inv_id,
+  inv_make,
+  inv_model,
+  inv_description,
+  inv_price,
+  inv_year,
+  inv_miles,
+  inv_color,
+  classification_id
+) {
+  try {
+    const sql =
+      "UPDATE public.inventory SET (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, 'images/vehicles/no-image.png', 'images/vehicles/no-image-tn.png', $5, $6, $7, $8) RETURNING *"
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+module.exports = {getClassifications, getVehiclesByClassificationId, getVehicleByInventoryId, AddNewClassification, AddNewVehicle, updateInventory};

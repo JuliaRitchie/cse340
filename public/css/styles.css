@@ -34,7 +34,7 @@ form label{
   background-color: aqua;
 }
 
-p, nav, header, li, button, a{
+p, nav, header, li, button, a, table{
   font-family: 'Nunito Sans';
 }
 
@@ -171,6 +171,8 @@ input:required:invalid, input:focus:invalid {
 #welcome-text{
   font-size: 2em;
 }
+
+
 
 main li{
   list-style-type: none;

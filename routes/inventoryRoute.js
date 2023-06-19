@@ -20,6 +20,8 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddInvent
 
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditView))
+
 router.post("/update/", utilities.handleErrors(invController.updateInventory));
 
 router.post(

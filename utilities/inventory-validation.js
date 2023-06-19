@@ -115,6 +115,7 @@ validate.checkUpdateData = async (req, res, next) => {
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     let classification = await utilities.getClassificationList()
+    // if there are any problems, they are going to be RIGHT HERE, Julia. CHECK THIS ONE FIRST
     res.render("inventory/edit", {
       errors,
       title: "Edit Vehicle",
@@ -135,5 +136,7 @@ validate.checkUpdateData = async (req, res, next) => {
   }
   next()
 }
+
+
 
 module.exports = validate
