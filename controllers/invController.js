@@ -138,31 +138,28 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
-/* ***************************
- *  Build edit inventory view
- * ************************** */
-invCont.buildEditView = async function (req, res, next) {
+invCont.buildEditView =  async function(req, res, next){
   const inv_id = parseInt(req.params.inv_id)
   let nav = await utilities.getNav()
-  const itemData = await invModel.getVehicleByInventoryId(inv_id)
-  const classification = await utilities.getClassificationList(itemData.classification_id)
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  let data = await invModel.getVehicleByInventoryId(inv_id)
+  // data = data.rows[0]
+  console.log(data[0].invModel)
+  const vehicle = `${data[0].inv_make} ${data[0].inv_model}`
+  let classification = await utilities.getClassificationList(data[0].classificationId)
   res.render("./inventory/update-inventory", {
-    title: "Edit " + itemName,
+    title: 'Edit ' + vehicle,
     nav,
     classification,
     errors: null,
-    inv_id: itemData.inv_id,
-    inv_make: itemData.inv_make,
-    inv_model: itemData.inv_model,
-    inv_year: itemData.inv_year,
-    inv_description: itemData.inv_description,
-    inv_image: itemData.inv_image,
-    inv_thumbnail: itemData.inv_thumbnail,
-    inv_price: itemData.inv_price,
-    inv_miles: itemData.inv_miles,
-    inv_color: itemData.inv_color,
-    classification_id: itemData.classification_id
+    inv_id: data[0].inv_id,
+    inv_make: data[0].inv_make,
+    inv_model: data[0].inv_model,
+    inv_year: data[0].inv_year,
+    inv_description: data[0].inv_description,
+    inv_price: data[0].inv_price,
+    inv_miles: data[0].inv_miles,
+    inv_color: data[0].inv_color,
+    classification_id: data[0].classification_id
   })
 }
 
@@ -213,8 +210,6 @@ invCont.updateInventory = async function (req, res, next) {
     inv_model,
     inv_year,
     inv_description,
-    inv_image,
-    inv_thumbnail,
     inv_price,
     inv_miles,
     inv_color,

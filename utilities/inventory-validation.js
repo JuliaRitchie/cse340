@@ -118,7 +118,7 @@ validate.checkUpdateData = async (req, res, next) => {
     // if there are any problems, they are going to be RIGHT HERE, Julia. CHECK THIS ONE FIRST
     res.render("inventory/edit", {
       errors,
-      title: "Edit Vehicle",
+      title: "Edit " + inv_make + inv_model,
       nav,
       inv_make,
       inv_model,

@@ -34,13 +34,19 @@ form label{
   background-color: aqua;
 }
 
-p, nav, header, li, button, a, table{
+p, nav, header, li, button, a, table, textarea, select{
   font-family: 'Nunito Sans';
 }
 
 header{
   display: flex;
   justify-content: space-between;
+}
+
+select{
+  font-size: 1.15em;
+  max-width: 300px;
+  margin-bottom: 20px;
 }
 
 nav{
@@ -144,6 +150,7 @@ button{
   color: black;
   font-size: 1.5em;
   padding: 5px;
+  max-width: 300px;
 }
 
 button:hover{
@@ -165,6 +172,10 @@ input:required:invalid, input:focus:invalid {
  input:required:valid {
   background-color: greenyellow;
  }
+
+textarea{
+  width: 300px;
+}
 
 /*****Link for color palette https://coolors.co/55d6be-acfcd9-7d5ba6-dddddd-fc6471 ******/
 

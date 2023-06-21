@@ -41,7 +41,6 @@ async function AddNewClassification(newClassification){
     const data = await pool.query(
       "INSERT INTO public.classification (classification_name) VALUES ($1)", [newClassification]
     )
-    console.log(data)
     return data.rows
   } catch (error){
     console.error('Addnewclassification in inventory-model error' + error)
