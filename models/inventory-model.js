@@ -73,7 +73,7 @@ async function updateInventory(
 ) {
   try {
     const sql =
-      "UPDATE public.inventory SET (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, 'images/vehicles/no-image.png', 'images/vehicles/no-image-tn.png', $5, $6, $7, $8) RETURNING *"
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_price = $4, inv_year = $5, inv_miles = $6, inv_color = $7, classification_id = $8 WHERE inv_id = $9 RETURNING *"
     const data = await pool.query(sql, [
       inv_make,
       inv_model,

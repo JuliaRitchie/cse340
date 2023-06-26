@@ -15,6 +15,7 @@ validate.classificationRules = () => {
 
 validate.checkClassification = async (req, res, next) => {
     const { classification_name } = req.body
+    let classification = utilities.getClassificationList()
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -23,7 +24,8 @@ validate.checkClassification = async (req, res, next) => {
         errors,
         title: "Management View",
         nav,
-        classification_name
+        classification_name,
+        classification
       })
       return
     }
@@ -124,7 +126,6 @@ validate.checkUpdateData = async (req, res, next) => {
       inv_model,
       inv_year,
       inv_description,
-      inv_image,
       inv_price,
       inv_miles,
       inv_color,

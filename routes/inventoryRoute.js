@@ -22,7 +22,10 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditView))
 
-router.post("/update/", utilities.handleErrors(invController.updateInventory));
+router.post("/update/", 
+    invValidate.vehicleRules(),
+    invValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory));
 
 router.post(
     "/add-new-classification",

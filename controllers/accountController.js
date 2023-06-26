@@ -25,13 +25,23 @@ async function buildRegister(req, res, next) {
     errors: null,
   })
 }
-
+/* ****************************************
+*  Deliver Management view
+* *************************************** */
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
   res.render("account/management", {
     title: "Account Management",
     nav,
   })
+}
+
+/* ****************************************
+*  Deliver update view
+* *************************************** */
+async function buildUpdate (req, res, next){
+  let nav = await utilities.getNav()
+  let account_id = req
 }
 
 /* ****************************************

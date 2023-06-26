@@ -106,7 +106,7 @@ invCont.AddNewVehicle = async function(req, res, next){
 
     if (vehicleResult) {
       let nav = await utilities.getNav()
-      
+      let classification = await utilities.getClassificationList()
       req.flash(
         "notice",
         `Congratulations, you added the ${inv_year} ${inv_color} ${inv_model}.`
@@ -114,6 +114,7 @@ invCont.AddNewVehicle = async function(req, res, next){
       res.status(201).render("./inventory/management", {
         title: "Management",
         nav,
+        classification
       })
     } else {
       let classification = await utilities.getClassificationList()
@@ -121,7 +122,7 @@ invCont.AddNewVehicle = async function(req, res, next){
       res.status(501).render("./inventory/add-inventory", {
         title: "Add New Vehicle",
         nav,
-        classification      })
+        classification})
     }
 }
 
@@ -164,58 +165,54 @@ invCont.buildEditView =  async function(req, res, next){
 }
 
 /* ***************************
- *  Update Inventory Data
- * ************************** */
-invCont.updateInventory = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  
-  const {
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_description,
-    inv_price,
-    inv_year,
-    inv_miles,
-    inv_color,
-    classification_id,
-  } = req.body
-  const updateResult = await invModel.updateInventory(
-    inv_id,  
-    inv_make,
-    inv_model,
-    inv_description,
-    inv_price,
-    inv_year,
-    inv_miles,
-    inv_color,
-    classification_id
-  )
+*  Update Inventory Data
+* ************************** */
 
-  if (updateResult) {
-    const itemName = updateResult.inv_make + " " + updateResult.inv_model
-    req.flash("notice", `The ${itemName} was successfully updated.`)
-    res.redirect("/inv/")
-  } else {
-    const classification = await utilities.getClassificationList(classification_id)
-    const itemName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the insert failed.")
-    res.status(501).render("inventory/edit-inventory", {
-    title: "Edit " + itemName,
-    nav,
-    classification,
-    errors: null,
+invCont.updateInventory = async function(req, res, next){
+  const {inv_make, inv_model, inv_year, inv_description, inv_price, inv_miles, inv_color, classification_id, inv_id} = req.body
+  const updateResult = await invModel.updateInventory(
     inv_id,
-    inv_make,
-    inv_model,
+    inv_make, 
+    inv_model, 
     inv_year,
-    inv_description,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
-    })
-  }
+    inv_description, 
+    inv_price, 
+    inv_miles, 
+    inv_color, 
+    classification_id)
+
+    if (updateResult) {
+      let nav = await utilities.getNav()
+      let classification = await utilities.getClassificationList()
+      req.flash(
+        "notice",
+        `Congratulations, you updated the ${inv_make} ${inv_model}.`
+      )
+      res.status(201).render("./inventory/management", {
+        title: "Management",
+        nav,
+        classification
+      })
+    } else {
+      let nav = await utilities.getNav()
+      let classification = await utilities.getClassificationList()
+      const itemName = `${inv_make} ${inv_model}`
+      req.flash("notice", "Sorry, the update failed.")
+      res.status(501).render("./inventory/add-inventory", {
+        nav,
+        title: "Edit " + itemName,
+        errors: null,
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+        classification})
+    }
 }
 
 module.exports = invCont

@@ -14,7 +14,7 @@
  </ul>
 <% } %>
 
-<form action="/inv/update" method="post">
+<form action="/inv/update" method="post" id="updateForm">
   <label for="inv_make">Vehicle Make:</label>
   <span>Only input letters</span>
   <input id="inv_make" type="text" name="inv_make" pattern="^[a-zA-Z0-9]+$" value="<%= locals.inv_make %>" required>
@@ -25,7 +25,7 @@
   <span>Only put in a 4 digit year. Example: 2009</span>
   <input id="inv_year" type="text" name="inv_year" pattern="^[0-9]{4}$" value="<%= locals.inv_year %>" required>
   <label for="inv_description">Vehicle Description:</label>
-  <textarea id="inv_description" type="text" name="inv_description" value="<%= locals.inv_description %>" required>Write the vehicle description here.</textarea>
+  <textarea id="inv_description" type="text" name="inv_description" required><%= locals.inv_description %></textarea>
   <label for="inv_price">Vehicle Price:</label>
   <span>Only input numbers</span>
   <input id="inv_price" type="text" pattern="[0-9]*" name="inv_price" value="<%= locals.inv_price %>" required>
@@ -44,3 +44,5 @@
     <% } %>>
     <button type="submit">Update Vehicle</button>
 </form>
+
+<script src="../../js/inv-update.js"></script>

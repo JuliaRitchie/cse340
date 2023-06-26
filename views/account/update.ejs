@@ -1,0 +1,36 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+<div>
+    <fieldset>
+        <form id="accountUpdate" method="post" action="account/update">
+            <label for="fname">First Name:</label>
+            <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>" placeholder="John">
+            <label for="lname">Last Name:</label>
+            <input type="text" id="accountLastname" name="account_lastname" required placeholder="Doe" value="<%= locals.account_lastname %>">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="account_email" value="<%= locals.account_email%>" required placeholder="example@email.com">
+            <input type="submit" value="Submit" id="submitButton">
+        </form>
+    </fieldset>
+    <fieldset>
+        <form id="passwordChange" method="post" action="">
+            <label for="pwd">Update Password:</label>
+            <input type="password" id="pwd" minlength="12" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"> 
+            <span>Password must contain 1 capital letter, 1 number, 1 special character and be at least 12 characters long.</span>
+            <input type="submit" value="Submit" id="submitButton">
+        </form>
+    </fieldset>
+</div>
