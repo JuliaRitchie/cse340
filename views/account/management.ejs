@@ -5,6 +5,7 @@
     } %>
 
 <%-messages()%>
-<h2>Welcome </h2>
+<h2>Welcome <%-locals.accountData.account_firstname%></h2>
 <p>You're logged in.</p>
-<a href="account/update">Update Account Information</a>
+<a href="/account/update">Update Account Information</a>
+<%- management%>

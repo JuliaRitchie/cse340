@@ -12,7 +12,7 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inv_id", utilities.handleErrors(invController.buildByInventoryId))
 
 // Route to build management view
-router.get("/", utilities.handleErrors(invController.buildManagementView))
+router.get("/", utilities.checkAccountType, utilities.handleErrors(invController.buildManagementView))
 // Route to build add classification form view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 // Route to build add inventory form view

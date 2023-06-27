@@ -106,6 +106,45 @@ Util.checkLogin = (req, res, next) => {
  }
 
  /* ****************************************
+ *  Check Account Type
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  if (res.locals.accountData.account_type == 'Client') {
+    req.flash("notice", "Please log in with the correct account.")
+    return res.redirect("/account/login")
+  }
+  else {
+    next()
+  }
+ }
+
+Util.inventoryEdit = (accountData) =>{
+  let management =''
+  if (accountData.account_type == 'Client') {
+    management = null
+  
+  }
+  else {
+    management += `<h3>Inventory Management</h3>`
+    management += `<a title="Edit Vehicle inventory" href="/inv/">Edit Inventory</a>`
+  }
+  console.log(management)
+  return management
+}
+
+Util.getAccountHeader = async function(req, res, next){
+let account_firstname = res.locals.accountData.account_firstname
+let header
+if (res.locals.loggedin){
+  header += `<a title="View your account ${account_firstname}" href="/account/" id="account"> Welcome ${account_firstname}</a> <a title="Logout here" href="/account/logout">`
+}
+else{
+  header += '<a title="Click to log in" href="/account/login" id="account">My Account</a>'
+}
+return header
+}
+
+ /* ****************************************
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {

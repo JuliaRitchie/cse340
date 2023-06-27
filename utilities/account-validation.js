@@ -69,14 +69,24 @@ validate.loginRules = () => {
 };
 
 validate.emailRules = () => {
-  // if email is being changed, it cannot already exist in the database body
-  ("account_email") .trim() .isEmail() .normalizeEmail() // refer to validator js docs 
-  .withMessage("A valid email is required.") .custom(async (account_email) => { const account_id = body.account_id 
-    const account = accountModel.getAccountById(account_id) // Check if submitted email is same as existing 
-    if (!account_email == account.account_email) { // No - Check if email exists in table 
-    const emailExists = await accountModel.checkEmail(account_email)} // Yes - throw error 
-    if (emailExists) { throw new Error
-  ("Email exists. Please login or use different email") } }) }
+  body("account_email")
+  .trim()
+  .isEmail()
+  .normalizeEmail() // refer to validator.js docs
+  .withMessage("A valid email is required.")
+  .custom(async (account_email, {req}) => {
+  const account_id = req.body.account_id
+  const account = await accountModel.getAccountById(account_id)
+  // Check if submitted email is same as existing
+  if (account_email != account.account_email) {
+  // No - Check if email exists in table
+  const emailExists = await accountModel.checkExistingEmail(account_email)
+  // Yes - throw error
+  if (emailExists.count != 0) {
+  throw new Error("Email exists. Please use a different email")
+  }
+  }
+  }) }
 
 /* ******************************
  * Check data and return errors or continue to registration
