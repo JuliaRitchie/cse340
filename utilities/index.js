@@ -132,15 +132,16 @@ Util.inventoryEdit = (accountData) =>{
   return management
 }
 
-Util.getAccountHeader = async function(req, res, next){
-let account_firstname = res.locals.accountData.account_firstname
-let header
-if (res.locals.loggedin){
-  header += `<a title="View your account ${account_firstname}" href="/account/" id="account"> Welcome ${account_firstname}</a> <a title="Logout here" href="/account/logout">`
+Util.getAccountHeader = async function(loggedin, accountData){
+let account_firstname = accountData.account_firstname
+let header =' '
+if (loggedin == 1){
+  header += `<a title="View your account ${account_firstname}" href="/account/" id="account"> Welcome ${account_firstname} | </a> <a title="Logout here" href="/account/logout">Logout</a>`
 }
 else{
   header += '<a title="Click to log in" href="/account/login" id="account">My Account</a>'
 }
+console.log(header)
 return header
 }
 

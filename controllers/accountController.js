@@ -31,13 +31,16 @@ async function buildRegister(req, res, next) {
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
   const account_id = parseInt(res.locals.accountData.account_id)
+  let loggedin = parseInt(res.locals.loggedin)
   const accountData = await accountModel.getAccountById(account_id)
+  const header = await utilities.getAccountHeader(loggedin, accountData)
   let management = await utilities.inventoryEdit(accountData)
   console.log(management)
   res.render("account/management", {
     title: "Account Management",
     nav,
     management,
+    header
   })
 }
 
@@ -46,6 +49,7 @@ async function buildManagement(req, res, next) {
 * *************************************** */
 async function buildUpdate (req, res, next){
   let nav = await utilities.getNav()
+  
   // const account_email = req.locals.accountData.account_email
   // const data = await accountModel.getAccountByEmail(account_email)
   res.render("account/update", {
