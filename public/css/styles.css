@@ -28,7 +28,7 @@ form label{
   font-size: 1.5em;
 }
 
-#submitButton{
+#submitButton, #submitButton2{
   width: 100px;
   border-radius: 10px;
   background-color: aqua;

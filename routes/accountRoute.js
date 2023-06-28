@@ -31,4 +31,12 @@ router.post(
     regValidate.checkLoginData,
    utilities.handleErrors(accountController.accountLogin)
  )
+
+// router.post(
+//   "/update",
+//   regValidate.updateRules(),
+//   regValidate.checkUpdateData,
+//   utilities.handleErrors(accountController.updateAccount)
+
+// )
 module.exports = router;
