@@ -168,6 +168,11 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+Util.logout = (req, res, next) => {
+  res.clearCookie('jwt')
+  return res.redirect('/')
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

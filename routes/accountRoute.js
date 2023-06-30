@@ -17,6 +17,8 @@ router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.b
 // Route to build update account page
 router.get("/update", utilities.handleErrors(accountController.buildUpdate));
 
+router.get('/logout', utilities.logout)
+
 // Process the registration data
 router.post(
     "/register",
