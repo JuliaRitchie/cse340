@@ -90,7 +90,7 @@ nav{
   flex-wrap: wrap;
 }
 
-a#csemotors, a#account{
+a#csemotors, a#account, a#logout{
   background-color: white;
   color: black;
   text-decoration: none;
@@ -118,7 +118,7 @@ nav ul li a:hover{
   padding: 10px;
 }
 
-a#csemotors:hover, a#account:hover{
+a#csemotors:hover, a#account:hover, a#logout:hover{
   background-color: black;
   color: white;
   text-decoration: none;
