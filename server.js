@@ -60,6 +60,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 //   res.render("index", {title: "Home"})
 // })
 
+app.use('/inbox', require('./routes/inboxRoute'))
+
 // Account route
 app.use("/account", require("./routes/accountRoute"))
 
