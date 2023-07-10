@@ -2,6 +2,11 @@ const pool = require("../database/index")
 /* *****************************
 *   Register new account
 * *************************** */
+
+async function getAccounts(){
+  return await pool.query("SELECT * FROM public.account ORDER BY account_firstname")
+}
+
 async function registerAccount(account_firstname, account_lastname, account_email, account_password){
     try {
       const sql = "INSERT INTO account (account_firstname, account_lastname, account_email, account_password, account_type) VALUES ($1, $2, $3, $4, 'Client') RETURNING *"
@@ -78,4 +83,4 @@ async function getAccountById (account_id) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, checkLogin, checkLogin, getAccountByEmail, getAccountById, updateAccount }
+module.exports = { registerAccount, checkExistingEmail, checkLogin, checkLogin, getAccountByEmail, getAccountById, updateAccount, getAccounts }

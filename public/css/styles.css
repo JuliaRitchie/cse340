@@ -90,6 +90,11 @@ nav{
   flex-wrap: wrap;
 }
 
+table, th, td {
+  border:1px solid black;
+  padding: 10px;
+}
+
 a#csemotors, a#account, a#logout{
   background-color: white;
   color: black;

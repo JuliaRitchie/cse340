@@ -5,6 +5,8 @@ const utilities = require('../utilities')
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 
-router.get('/', utilities.handleErrors(inboxController.buildInbox));
+router.get('/', utilities.checkLogin, utilities.handleErrors(inboxController.buildInbox));
+
+router.get('/new/', utilities.checkLogin, utilities.handleErrors(inboxController.buildNewMessage))
 
 module.exports = router;

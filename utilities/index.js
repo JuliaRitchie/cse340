@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
+const inboxModel = require("../models/inbox-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -39,7 +41,23 @@ Util.getClassificationList = async function(classification_id = null) {
   return classification
 }
 
+Util.getClientList = async function(account_id = null){
+  let data = await accountModel.getAccounts()
+  let recipients = "<select>"
+  recipients += `<option value='default'>Select Recipient</option>`
+  data.rows.forEach((row) => {
+    
+    recipients += `<option `
+    if(account_id == row.account_id){
+      recipients += `selected `
+    }
+    recipients += `value="${row.account_id}">${row.account_firstname}</option>`
+  })
 
+
+  recipients += "</select>"
+  return recipients
+}
 
 /* **************************************
 * Build the classification view HTML
