@@ -9,4 +9,8 @@ router.get('/', utilities.checkLogin, utilities.handleErrors(inboxController.bui
 
 router.get('/new/', utilities.checkLogin, utilities.handleErrors(inboxController.buildNewMessage))
 
+router.post(
+    '/send',
+    utilities.handleErrors(inboxController.sendMessage))
+
 module.exports = router;

@@ -43,7 +43,7 @@ Util.getClassificationList = async function(classification_id = null) {
 
 Util.getClientList = async function(account_id = null){
   let data = await accountModel.getAccounts()
-  let recipients = "<select>"
+  let recipients = "<select name='recipient'>"
   recipients += `<option value='default'>Select Recipient</option>`
   data.rows.forEach((row) => {
     

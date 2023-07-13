@@ -4,6 +4,8 @@
       res.redirect('/')
     } %>
 
+<%- messages() %>
+
 <% if (errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
@@ -17,8 +19,11 @@
     <label for="recipient">Recipient</label>
     <%- recipients%>
     <label for="subject">Subject</label>
-    <input type="text" required name="subjectLine">
+    <input type="text" required name="subject">
     <label for="message">Message</label>
     <textarea required name="message">Write your message here.</textarea>
+    <input type="hidden" name="account_id"
+    <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
+    <% } %>>
     <button id="sendNewMessage">Send</button>
 </form>
