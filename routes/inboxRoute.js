@@ -9,6 +9,8 @@ router.get('/', utilities.checkLogin, utilities.handleErrors(inboxController.bui
 
 router.get('/new/', utilities.checkLogin, utilities.handleErrors(inboxController.buildNewMessage))
 
+router.get('/archive/', utilities.checkLogin, utilities.handleErrors(inboxController.buildArchivedMessage))
+
 router.post(
     '/send',
     utilities.handleErrors(inboxController.sendMessage))

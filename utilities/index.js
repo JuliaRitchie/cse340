@@ -41,6 +41,76 @@ Util.getClassificationList = async function(classification_id = null) {
   return classification
 }
 
+
+
+Util.getMessages = async function(account_id){
+  let data = await inboxModel.getMessages()
+  let fromTransfer = await accountModel.getAccountById(data.rows[0].message_from)
+  let from = fromTransfer.account_firstname
+  let messageTable = "<table>"
+  messageTable += '<tr> <th>Received</th> <th>Subject</th>'
+  messageTable += "<th>From</th>"
+  messageTable += "<th>Read</th>"
+  messageTable += "</tr>"
+  data.rows.forEach((row) => {
+    if(account_id == row.message_to){
+      if(row.message_archived == false){
+        messageTable += `<tr>`
+        messageTable += `<th> ${row.message_created} </th>`
+        messageTable += `<th> <a href="/inbox/message/${row.message_id}">${row.message_subject}</a></th>`
+        messageTable += `<th>${from}</th>`
+        messageTable += `<th>${row.message_read}</th>`
+        messageTable += `</tr>`
+      }
+    }
+  })
+  messageTable += '</table>'
+  return messageTable
+}
+
+Util.countArchived = async function(account_id){
+  let data = await inboxModel.getMessages()
+  let archivedNumber = 0
+  data.rows.forEach((row) => {
+    if (account_id == row.message_to){
+      if(row.message_archived == true){
+        archivedNumber += 1
+      }
+    }
+  })
+  return archivedNumber
+}
+
+Util.fetchMessage = async function(message_id){
+
+}
+
+Util.getArchivedMessages = async function(account_id){
+  let data = await inboxModel.getMessages()
+  let fromTransfer = await accountModel.getAccountById(data.rows[0].message_from)
+  let from = fromTransfer.account_firstname
+  let archiveTable = "<table>"
+  archiveTable += '<tr> <th>Received</th> <th>Subject</th>'
+  archiveTable += "<th>From</th>"
+  archiveTable += "<th>Read</th>"
+  archiveTable += "</tr>"
+  data.rows.forEach((row) => {
+    if(account_id == row.message_to){
+      if(row.message_archived == true){
+        archiveTable += `<tr>`
+        archiveTable += `<th> ${row.message_created} </th>`
+        archiveTable += `<th> <a href="/inbox/archive/message">${row.message_subject}</a></th>`
+        
+        archiveTable += `<th>${from}</th>`
+        archiveTable += `<th>${row.message_read}</th>`
+        archiveTable += `</tr>`
+      }
+    }
+  })
+  archiveTable += '</table>'
+  return archiveTable
+}
+
 Util.getClientList = async function(account_id = null){
   let data = await accountModel.getAccounts()
   let recipients = "<select name='recipient'>"

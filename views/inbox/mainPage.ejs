@@ -7,18 +7,7 @@
 <%- messages() %>
 
 <ul><a href="/inbox/new/">Create New Message</a></ul>
-<!-- <ul><a href="#">View <%# archived %> Archived Message(s)</a></ul> -->
-<table>
-  <tr>
-    <th>Received</th>
-    <th>Subject</th>
-    <th>From</th>
-    <th>Read</th>
-  </tr>
-  <tr>
-    <th>07/3/2023</th>
-    <th><a href="#">Sample</a></th>
-    <th>Server</th>
-    <th>FALSE</th>
-  </tr>
-</table>
+<ul><a href="/inbox/archive/">View <%- archivedNumber %> Archived Message(s)</a></ul>
+
+<h2>Your Messages</h2>
+<%- messageTable%>
