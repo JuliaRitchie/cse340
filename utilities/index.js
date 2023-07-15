@@ -81,8 +81,17 @@ Util.countArchived = async function(account_id){
   return archivedNumber
 }
 
-Util.fetchMessage = async function(message_id){
-
+Util.countUnread = async function(account_id){
+  let data = await inboxModel.getMessages()
+  let unreadNumber = 0
+  data.rows.forEach((row) => {
+    if (account_id == row.message_to){
+      if(row.message_read == false){
+        unreadNumber += 1
+      }
+    }
+  })
+  return unreadNumber
 }
 
 Util.getArchivedMessages = async function(account_id){
@@ -99,7 +108,7 @@ Util.getArchivedMessages = async function(account_id){
       if(row.message_archived == true){
         archiveTable += `<tr>`
         archiveTable += `<th> ${row.message_created} </th>`
-        archiveTable += `<th> <a href="/inbox/archive/message">${row.message_subject}</a></th>`
+        archiveTable += `<th> <a href="/inbox/message/${row.message_id}">${row.message_subject}</a></th>`
         
         archiveTable += `<th>${from}</th>`
         archiveTable += `<th>${row.message_read}</th>`

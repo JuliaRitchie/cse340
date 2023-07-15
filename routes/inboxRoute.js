@@ -11,6 +11,8 @@ router.get('/new/', utilities.checkLogin, utilities.handleErrors(inboxController
 
 router.get('/archive/', utilities.checkLogin, utilities.handleErrors(inboxController.buildArchivedMessage))
 
+router.get('/message/:message_id', utilities.checkLogin, utilities.handleErrors(inboxController.buildMessageView))
+
 router.post(
     '/send',
     utilities.handleErrors(inboxController.sendMessage))

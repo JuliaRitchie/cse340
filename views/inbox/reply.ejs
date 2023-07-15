@@ -1,0 +1,29 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+
+<form action="/inbox/send" method="post">
+    <span>All inputs are required.</span>
+    <label for="recipient">Recipient</label>
+    <%- recipients%>
+    <label for="subject">Subject</label>
+    <input type="text" required name="subject">
+    <label for="message">Message</label>
+    <textarea required name="message">Write your message here.</textarea>
+    <input type="hidden" name="account_id"
+    <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
+    <% } %>>
+    <button id="sendNewMessage">Send</button>
+</form>

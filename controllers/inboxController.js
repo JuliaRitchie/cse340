@@ -1,7 +1,6 @@
 const utilities = require("../utilities")
 const inboxModel = require("../models/inbox-model")
-const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
+const accountModel = require("../models/account-model")
 require("dotenv").config()
 
 async function buildInbox(req, res, next) {
@@ -26,6 +25,25 @@ async function buildArchivedMessage(req, res, next){
     title: 'Archived Messages',
     nav,
     archiveTable,
+    errors: null
+  })
+}
+
+async function buildMessageView(req, res, next){
+  let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+  const data = await inboxModel.getMessageById(message_id)
+  const subject = data.message_subject
+  const messageFromId = data.message_from
+  let accountInfo = await accountModel.getAccountById(messageFromId)
+  const messageFrom = accountInfo.account_firstname + ' ' + accountInfo.account_lastname
+  const messageBody = data.message_body
+  res.render("inbox/message", {
+    title: subject,
+    subject,
+    nav,
+    messageFrom,
+    messageBody,
     errors: null
   })
 }
@@ -65,4 +83,4 @@ async function sendMessage(req, res, next){
   }
 }
 
-module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage }
+module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView }

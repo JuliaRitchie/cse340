@@ -32,6 +32,7 @@ async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
   const account_id = parseInt(res.locals.accountData.account_id)
   let loggedin = parseInt(res.locals.loggedin)
+  let unread = await utilities.countUnread(res.locals.accountData.account_id)
   const accountData = await accountModel.getAccountById(account_id)
   const header = await utilities.getAccountHeader(loggedin, accountData)
   let management = await utilities.inventoryEdit(accountData)
@@ -40,7 +41,8 @@ async function buildManagement(req, res, next) {
     title: "Account Management",
     nav,
     management,
-    header
+    header,
+    unread
   })
 }
 
