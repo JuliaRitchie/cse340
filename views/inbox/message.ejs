@@ -4,6 +4,8 @@
       res.redirect('/')
     } %>
 
+<%-messages()%>
+
 <h2>Subject: </h2>
 <p><%- subject %></p>
 <h2>From: </h2>
@@ -11,8 +13,9 @@
 <h2>Message: </h2>
 <p><%- messageBody%></p>
 <p>----------------------------------------------------------------------------</p>
-<button href="/inbox">Return to Inbox</button>
-<button href="/inbox/reply">Reply</button>
-<button href="/inbox/read">Mark as Read</button>
-<button href="/inbox/archive">Archive Message</button>
-<button href="/inbox/delete">Delete Message</button>
+<p hidden>message_ID</p>
+<a href="/inbox">Return to Inbox</a>
+<a href="/inbox/reply">Reply</a>
+<a href="/inbox/message/<%- message_id%>/read">Mark as Read</a>
+<a href="/inbox/archive">Archive Message</a>
+<a href="/inbox/delete">Delete Message</a>

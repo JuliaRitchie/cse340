@@ -15,13 +15,36 @@ async function getMessageById(message_id){
       }
 }
 
+async function markAsRead(message_id){
+  console.log(message_id)
+  try{
+    
+    const sql = await pool.query("UPDATE message SET message_read = true WHERE message_id = $1;", [message_id])
+    return sql.rows
+    
+  } catch (error){
+    return new Error("Mark as read failed in Inbox model.")
+  }
+}
+
+async function markAsArchived(message_id){
+  try{
+    
+    const sql = await pool.query("UPDATE message SET message_archived = true WHERE message_id = $1;", [message_id])
+    return sql.rows
+    
+  } catch (error){
+    return new Error("Mark as read failed in Inbox model.")
+  }
+}
+
 async function sendMessage(recipient, subject, message, account_id){
     try{
-        const sql ="INSERT INTO message (message_subject, message_body, message_to, message_from) VALUES ($1, $2, $3, $4)"
+        const sql ="INSERT INTO public.message (message_subject, message_body, message_to, message_from) VALUES ($1, $2, $3, $4)"
         return await pool.query(sql, [subject, message, recipient, account_id])
     } catch(error){
         return error.message
     }
 }
 
-module.exports = {getMessages, sendMessage, getMessageById}
+module.exports = {getMessages, sendMessage, getMessageById, markAsRead, markAsArchived}

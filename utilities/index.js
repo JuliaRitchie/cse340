@@ -58,6 +58,7 @@ Util.getMessages = async function(account_id){
         messageTable += `<tr>`
         messageTable += `<th> ${row.message_created} </th>`
         messageTable += `<th> <a href="/inbox/message/${row.message_id}">${row.message_subject}</a></th>`
+        
         messageTable += `<th>${from}</th>`
         messageTable += `<th>${row.message_read}</th>`
         messageTable += `</tr>`
@@ -122,7 +123,7 @@ Util.getArchivedMessages = async function(account_id){
 
 Util.getClientList = async function(account_id = null){
   let data = await accountModel.getAccounts()
-  let recipients = "<select name='recipient'>"
+  let recipients = "<select id='recipient' name='recipient'>"
   recipients += `<option value='default'>Select Recipient</option>`
   data.rows.forEach((row) => {
     

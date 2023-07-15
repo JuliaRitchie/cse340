@@ -13,6 +13,8 @@ router.get('/archive/', utilities.checkLogin, utilities.handleErrors(inboxContro
 
 router.get('/message/:message_id', utilities.checkLogin, utilities.handleErrors(inboxController.buildMessageView))
 
+router.get('/message/:message_id/read', utilities.handleErrors(inboxController.markMessageRead))
+
 router.post(
     '/send',
     utilities.handleErrors(inboxController.sendMessage))
