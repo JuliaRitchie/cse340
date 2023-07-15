@@ -29,6 +29,27 @@ async function buildArchivedMessage(req, res, next){
   })
 }
 
+async function deleteMessage(req, res, next) {
+  let nav = await utilities.getNav()
+  let messageTable = await utilities.getMessages(res.locals.accountData.account_id)
+  let archivedNumber = await utilities.countArchived(res.locals.accountData.account_id)
+  const message_id = req.params.message_id
+  fname = res.locals.accountData.account_firstname
+  lname = res.locals.accountData.account_lastname 
+  const messageDeleted = inboxModel.deleteMessage(message_id)
+  if(messageDeleted){
+    req.flash("notice",
+    "Your message was deleted.")
+    res.status(201).render("inbox/mainPage", {
+      title: fname +' '+ lname + "'s Inbox",
+      nav,
+      errors: null,
+      messageTable,
+      archivedNumber
+    })
+  }
+}
+
 async function buildMessageView(req, res, next){
   let nav = await utilities.getNav()
   const message_id = req.params.message_id
@@ -136,4 +157,4 @@ async function markMessageArchived(req, res, next){
   
 }
 
-module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead, markMessageArchived }
+module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead, markMessageArchived, deleteMessage }

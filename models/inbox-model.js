@@ -38,6 +38,17 @@ async function markAsArchived(message_id){
   }
 }
 
+async function deleteMessage(message_id){
+  try{
+    
+    const sql = await pool.query("DELETE FROM public.message WHERE message_id = $1;", [message_id])
+    return sql.rows
+    
+  } catch (error){
+    return new Error("Mark as read failed in Inbox model.")
+  }
+}
+
 async function sendMessage(recipient, subject, message, account_id){
     try{
         const sql ="INSERT INTO public.message (message_subject, message_body, message_to, message_from) VALUES ($1, $2, $3, $4)"
@@ -47,4 +58,4 @@ async function sendMessage(recipient, subject, message, account_id){
     }
 }
 
-module.exports = {getMessages, sendMessage, getMessageById, markAsRead, markAsArchived}
+module.exports = {getMessages, sendMessage, getMessageById, markAsRead, markAsArchived, deleteMessage}
