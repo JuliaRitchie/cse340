@@ -110,4 +110,30 @@ async function markMessageRead(req, res, next){
   
 }
 
-module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead }
+async function markMessageArchived(req, res, next){
+  let nav = await utilities.getNav()
+  const message_id = req.params.message_id
+  const data = await inboxModel.getMessageById(message_id)
+  const subject = data.message_subject
+  const messageFromId = data.message_from
+  let accountInfo = await accountModel.getAccountById(messageFromId)
+  const messageFrom = accountInfo.account_firstname + ' ' + accountInfo.account_lastname
+  const messageBody = data.message_body
+  const messageRead = await inboxModel.markAsArchived(message_id)
+  if(messageRead){
+    req.flash(
+      "notice",
+      "Your message was archived.")
+      res.status(201).render("inbox/message",{
+      title: subject,
+      subject,
+      nav,
+      messageFrom,
+      messageBody,
+      errors: null,
+      message_id})
+  }
+  
+}
+
+module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead, markMessageArchived }
