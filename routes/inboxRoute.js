@@ -19,6 +19,8 @@ router.get('/message/:message_id/archive', utilities.handleErrors(inboxControlle
 
 router.get('/message/:message_id/delete', utilities.handleErrors(inboxController.deleteMessage))
 
+router.get('/message/:message_id/reply', utilities.handleErrors(inboxController.buildReplyMessage))
+
 router.post(
     '/send',
     utilities.handleErrors(inboxController.sendMessage))

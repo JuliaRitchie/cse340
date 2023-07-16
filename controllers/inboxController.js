@@ -81,6 +81,24 @@ async function buildNewMessage(req, res, next) {
   })
 }
 
+async function buildReplyMessage(req, res, next) {
+  let nav = await utilities.getNav()
+  let recipients = await utilities.getClientList()
+  const message_id = req.params.message_id
+  const data = await inboxModel.getMessageById(message_id)
+  const message_subject = data.message_subject
+  const message_body = data.message_body
+  const message_from = data.message_body
+  res.render("inbox/reply", {
+    title: "Reply Message",
+    nav,
+    errors: null,
+    recipients,
+    message_subject,
+    message_body
+  })
+}
+
 async function sendMessage(req, res, next){
   let nav = await utilities.getNav()
   let messageTable = await utilities.getMessages(res.locals.accountData.account_id)
@@ -157,4 +175,4 @@ async function markMessageArchived(req, res, next){
   
 }
 
-module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead, markMessageArchived, deleteMessage }
+module.exports = { buildInbox, buildNewMessage, sendMessage, buildArchivedMessage, buildMessageView, markMessageRead, markMessageArchived, deleteMessage, buildReplyMessage }
