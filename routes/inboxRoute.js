@@ -1,6 +1,7 @@
 const express = require("express")
 const router = new express.Router() 
 const inboxController = require("../controllers/inboxController.js")
+const inboxValidator = require("../utilities/inbox-validation.js")
 const utilities = require('../utilities')
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -23,6 +24,9 @@ router.get('/message/:message_id/reply', utilities.handleErrors(inboxController.
 
 router.post(
     '/send',
-    utilities.handleErrors(inboxController.sendMessage))
+    inboxValidator.newMessageRules(),
+    inboxValidator.checkMessageRules,
+    utilities.handleErrors(inboxController.sendMessage)
+    )
 
 module.exports = router;

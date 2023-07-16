@@ -14,14 +14,16 @@
    </ul>
   <% } %>
 
+<a href="/inbox">Back to Inbox</a>
+
 <form action="/inbox/send" method="post">
     <span>All inputs are required.</span>
     <label for="recipient">Recipient</label>
     <%- recipients%>
     <label for="subject">Subject</label>
-    <input type="text" required name="subject" id="subject">
+    <input type="text" required name="subject" id="subject" value="<%-locals.subject%>">
     <label for="message">Message</label>
-    <textarea required name="message" id="message">Write your message here.</textarea>
+    <textarea required name="message" id="message"><%-locals.message%></textarea>
     <input type="hidden" name="account_id"
     <% if(locals.accountData.account_id) { %> value="<%= locals.accountData.account_id %>"
     <% } %>>
