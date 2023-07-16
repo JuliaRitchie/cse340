@@ -34,7 +34,9 @@ validate.checkMessageRules = async (req, res, next) => {
             subject,
             message
         })
+        return
             }
+        next()
 }
 
 module.exports = validate
